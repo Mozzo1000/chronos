@@ -25,14 +25,13 @@ jobs:
         env:
             VITE_POCKETBASE_URL: ${{ secrets.POCKETBASE_URL }}
         run: |
-          cd web
           npm ci
           npm run build
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web/dist
+          path: dist
           
 
   deploy:
