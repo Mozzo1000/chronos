@@ -1,7 +1,9 @@
 import { useLocation } from 'preact-iso'; // or 'preact-router'
 import { LogOut, Calendar as CalendarIcon, Activity, BarChart3 } from 'lucide-preact';
+import { useAuth } from '../hooks/useAuth';
 
 export default function Header() {
+  const { isValid, user, logout } = useAuth();
   const { url, route } = useLocation();
   const today = new Date().toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long' });
 
@@ -20,7 +22,7 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="w-10 h-10 rounded-md border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:text-red-500 transition-all">
+            <button onClick={logout} className="w-10 h-10 rounded-md border border-slate-200 bg-white flex items-center justify-center text-slate-400 hover:text-red-500 transition-all">
               <LogOut size={16} />
             </button>
           </div>

@@ -5,18 +5,28 @@ import Home from './pages/Home.jsx';
 import { NotFound } from './pages/_404.jsx';
 import './style.css';
 import Stats from './pages/Stats.jsx';
+import Login from './components/Login.jsx';
+import { useAuth } from './hooks/useAuth';
 
 export function App() {
+	const { isValid } = useAuth();
+
+    if (!isValid) {
+        return <Login />;
+    }
+
 	return (
 		<LocationProvider>
-			<Header />
-			<main>
-				<Router>
-					<Route path="/" component={Home} />
-					<Route path="/stats" component={Stats} />
-					<Route default component={NotFound} />
-				</Router>
-			</main>
+			<div className="min-h-screen bg-[#fafafa]">
+				<Header />
+				<main>
+					<Router>
+						<Route path="/" component={Home} />
+						<Route path="/stats" component={Stats} />
+						<Route default component={NotFound} />
+					</Router>
+				</main>
+			</div>
 		</LocationProvider>
 	);
 }
